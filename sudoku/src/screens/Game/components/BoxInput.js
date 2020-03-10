@@ -4,11 +4,11 @@ import { BoardContext } from '../../../context/BoardContext'
 import { setFilledBoard } from '../../../actions'
 
 function BoxInput (props) {
-  const { board, dispatch, isReset, solution, isValidate } = useContext(BoardContext)
+  const { board, dispatch, isReset, solution } = useContext(BoardContext)
   const [input, setInput] = useState(props.value)
   const [isValid, setIsValid] = useState(null)
   useEffect(() => {
-    setInput(props.value)
+    setInput(props.value == 0 ? '' : props.value)
   }, [])
 
   const handleInput = (e) => {

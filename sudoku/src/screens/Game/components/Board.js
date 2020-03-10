@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { StyleSheet, View, Text, ScrollView } from 'react-native'
 import { BoardContext } from '../../../context/BoardContext'
 import {
@@ -12,10 +12,9 @@ import {
 } from '../../../actions'
 import api from '../../../api'
 import Box from './Box'
-import Alert from '../../../components/Alert'
 
 function Board (props) {
-  const { board, isReset, filledBoard, dispatch, isValidate } = useContext(BoardContext)
+  const { board, isReset, filledBoard, dispatch } = useContext(BoardContext)
 
   useEffect(() => {
     dispatch(setLoading(true))
@@ -89,7 +88,7 @@ function Board (props) {
         {board.map((b, index) => <Box key={index} row={index} numbers={b} />)}
       </View>
       <View style={{ marginTop: 20 }}>
-        <Text onPress={validate} style={[styles.button, styles.buttonWarning]}>Validate</Text>
+        <Text onPress={solve} style={[styles.button, styles.buttonWarning]}>Give up</Text>
         <Text onPress={clear} style={[styles.button, styles.buttonPrimary]}>Clear</Text>
       </View>
     </ScrollView>
