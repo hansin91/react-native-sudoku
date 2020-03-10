@@ -1,0 +1,5 @@
+export const SET_BOARD = 'SET_BOARD'
+export const SET_MESSAGE = 'SET_MESSAGE'
+export const SET_ERRORS = 'SET_ERRORS'
+export const SET_LOADING = 'SET_LOADING'
+export const SET_FILLED_BOARD = 'SET_FILLED_BOARD'
