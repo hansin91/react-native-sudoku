@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from 'react-native'
 function Loader () {
   return (
     <View style={styles.loader}>
-      <Text>Loading</Text>
+      <Text style={{ color: '#fff', fontSize: 15, fontWeight: 'bold' }}>Loading</Text>
     </View>
   )
 }
@@ -17,6 +17,9 @@ const styles = StyleSheet.create({
     top: 0,
     right: 0,
     bottom: 0,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     left: 0,
     backgroundColor: 'rgba(0,0,0,0.7)'
   }

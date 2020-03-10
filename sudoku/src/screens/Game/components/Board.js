@@ -1,12 +1,21 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { StyleSheet, View, Text, ScrollView } from 'react-native'
 import { BoardContext } from '../../../context/BoardContext'
-import { setBoard, setErrors, setLoading, setFilledBoard } from '../../../actions'
+import {
+  setBoard,
+  setResetBoard,
+  setErrors,
+  setLoading,
+  setFilledBoard,
+  validateBoard,
+  setSolutionBoard
+} from '../../../actions'
 import api from '../../../api'
 import Box from './Box'
+import Alert from '../../../components/Alert'
 
 function Board (props) {
-  const { board, filledBoard, dispatch } = useContext(BoardContext)
+  const { board, isReset, filledBoard, dispatch, isValidate } = useContext(BoardContext)
 
   useEffect(() => {
     dispatch(setLoading(true))
@@ -16,12 +25,29 @@ function Board (props) {
     })
       .then(response => {
         dispatch(setBoard(response.data.board))
+        api.post('/solve', encodeParams({ board: response.data.board }))
+          .then(response => {
+            dispatch(setSolutionBoard(response.data.solution))
+          })
+          .catch(err => {
+            dispatch(setErrors(err.response))
+          })
+          .finally(() => {
+            dispatch(setLoading(false))
+          })
       })
       .catch(err => {
         dispatch(setErrors(err.response))
+        dispatch(setLoading(false))
       })
-      .finally(() => dispatch(setLoading(false)))
   }, [])
+
+
+  useEffect(() => {
+    if (isReset) {
+      dispatch(setResetBoard(false))
+    }
+  }, [isReset])
 
   const encodeBoard = (board) => board.reduce((result, row, i) => result + `%5B${encodeURIComponent(row)}%5D${i === board.length - 1 ? '' : '%2C'}`, '')
 
@@ -33,11 +59,17 @@ function Board (props) {
   const validate = () => {
     api.post('/validate', encodeParams({ board: filledBoard }))
       .then(response => {
-        console.log(response.data)
+        const status = response.data.status
+        dispatch(validateBoard(true))
+        console.log(status)
       })
       .catch(err => {
-        console.log(err)
+        dispatch(setErrors(err.response))
       })
+  }
+
+  const clear = () => {
+    dispatch(setResetBoard(true))
   }
 
   const solve = () => {
@@ -58,7 +90,7 @@ function Board (props) {
       </View>
       <View style={{ marginTop: 20 }}>
         <Text onPress={validate} style={[styles.button, styles.buttonWarning]}>Validate</Text>
-        <Text onPress={solve} style={[styles.button, styles.buttonSuccess]}>Solve</Text>
+        <Text onPress={clear} style={[styles.button, styles.buttonPrimary]}>Clear</Text>
       </View>
     </ScrollView>
   )

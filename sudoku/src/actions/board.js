@@ -1,5 +1,12 @@
-import { SET_MESSAGE, SET_BOARD, SET_ERRORS, SET_LOADING, SET_FILLED_BOARD } from './types'
-import api from '../api'
+import {
+  SET_MESSAGE,
+  SET_BOARD, SET_ERRORS,
+  SET_LOADING,
+  SET_FILLED_BOARD,
+  SET_RESET_BOARD,
+  VALIDATE_BOARD,
+  SET_SOLUTION_BOARD
+} from './types'
 
 export const setLoading = (value) => ({
   type: SET_LOADING,
@@ -8,6 +15,11 @@ export const setLoading = (value) => ({
 
 export const setBoard = (value) => ({
   type: SET_BOARD,
+  payload: value
+})
+
+export const setResetBoard = (value) => ({
+  type: SET_RESET_BOARD,
   payload: value
 })
 
@@ -26,20 +38,12 @@ export const setFilledBoard = (value) => ({
   payload: value
 })
 
-export const fetchBoard = (difficulty) => (dispatch) => {
-  console.log('here')
-  dispatch(setLoading(true))
-  api({
-    method: 'GET',
-    url: '/board?difficulty=' + difficulty
-  })
-    .then(response => {
-      console.log(response.data)
-      dispatch(setBoard(response.data.board))
-    })
-    .catch(err => {
-      console.log(err.response)
-      dispatch(setErrors(err.response))
-    })
-    .finally(() => dispatch(setLoading(true)))
-}
+export const validateBoard = (value) => ({
+  type: VALIDATE_BOARD,
+  payload: value
+})
+
+export const setSolutionBoard = (value) => ({
+  type: SET_SOLUTION_BOARD,
+  payload: value
+})

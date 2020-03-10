@@ -7,8 +7,12 @@ export const BoardProvider = ({ children }) => {
   const [state, dispatch] = useReducer(boardReducer, initialState)
   return (<BoardContext.Provider value={{
     board: state.board,
+    isReset: state.isReset,
+    originalBoard: state.originalBoard,
     filledBoard: state.filledBoard,
     isLoading: state.isLoading,
+    solution: state.solution,
+    isValidate: state.isValidate,
     dispatch
   }}>
     {children}
