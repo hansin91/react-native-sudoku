@@ -4,7 +4,7 @@ import { Container } from 'native-base'
 import Board from './components/Board'
 import { BoardContext } from '../../context/BoardContext'
 import Loader from './components/Loader'
-import { setResetBoard, setBoard } from '../../actions'
+import { setResetBoard, setBoard, resetScore } from '../../actions'
 
 function Game ({ route, navigation }) {
   const { level } = route.params
@@ -12,6 +12,7 @@ function Game ({ route, navigation }) {
 
   const clear = () => {
     dispatch(setResetBoard(true))
+    dispatch(resetScore(0))
   }
 
   const solve = () => {

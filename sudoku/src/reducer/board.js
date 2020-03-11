@@ -6,7 +6,8 @@ import {
   VALIDATE_BOARD,
   SET_SOLUTION_BOARD,
   SET_SCORE,
-  SET_PLAYER
+  SET_PLAYER,
+  RESET_SCORE
 } from '../actions/types'
 
 export const initialState = {
@@ -22,6 +23,11 @@ export const initialState = {
 
 export default (state, action) => {
   switch (action.type) {
+    case RESET_SCORE:
+      return {
+        ...state,
+        score: action.payload
+      }
     case SET_PLAYER:
       return {
         ...state,

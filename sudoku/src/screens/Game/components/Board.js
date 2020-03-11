@@ -6,15 +6,13 @@ import {
   setResetBoard,
   setErrors,
   setLoading,
-  setFilledBoard,
-  validateBoard,
   setSolutionBoard
 } from '../../../actions'
 import api from '../../../api'
 import Box from './Box'
 
 function Board (props) {
-  const { board, isReset, filledBoard, dispatch } = useContext(BoardContext)
+  const { board, isReset, dispatch } = useContext(BoardContext)
 
   const encodeBoard = (board) => board.reduce((result, row, i) => result + `%5B${encodeURIComponent(row)}%5D${i === board.length - 1 ? '' : '%2C'}`, '')
 
@@ -37,7 +35,6 @@ function Board (props) {
         dispatch(setSolutionBoard(response.data.solution))
       })
       .catch(err => {
-        console.log(err.response)
         dispatch(setErrors(err.response))
       })
       .finally(() => dispatch(setLoading(false)))
@@ -48,18 +45,6 @@ function Board (props) {
       dispatch(setResetBoard(false))
     }
   }, [isReset])
-
-  // const validate = () => {
-  //   api.post('/validate', encodeParams({ board: filledBoard }))
-  //     .then(response => {
-  //       const status = response.data.status
-  //       dispatch(validateBoard(true))
-  //       console.log(status)
-  //     })
-  //     .catch(err => {
-  //       dispatch(setErrors(err.response))
-  //     })
-  // }
 
   return (
     <View style={{ borderRightWidth: 1, borderBottomWidth: 1 }}>

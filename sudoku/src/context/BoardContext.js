@@ -13,7 +13,7 @@ export const BoardProvider = ({ children }) => {
     isLoading: state.isLoading,
     solution: state.solution,
     isValidate: state.isValidate,
-    username: state.username,
+    playerName: state.username,
     score: state.score,
     dispatch
   }}>

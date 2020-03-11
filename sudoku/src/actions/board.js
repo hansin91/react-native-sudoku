@@ -7,7 +7,8 @@ import {
   VALIDATE_BOARD,
   SET_SOLUTION_BOARD,
   SET_PLAYER,
-  SET_SCORE
+  SET_SCORE,
+  RESET_SCORE
 } from './types'
 
 export const setLoading = (value) => ({
@@ -58,4 +59,9 @@ export const setPlayer = (username) => ({
 export const setScore = (step) => ({
   type: SET_SCORE,
   payload: step
+})
+
+export const resetScore = (value) => ({
+  type: RESET_SCORE,
+  payload: value
 })

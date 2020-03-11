@@ -1,17 +1,17 @@
 import React, { useState, useContext } from 'react'
-import { Image, View, Text, TextInput, StyleSheet, Button, TouchableOpacity } from 'react-native'
+import { Image, View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
 import { BoardContext } from '../../context/BoardContext'
 import { setPlayer } from '../../actions'
 
 function Home ({ navigation }) {
-  const { dispatch } = useContext(BoardContext)
+  const { dispatch, playerName } = useContext(BoardContext)
   const goToGame = () => {
     navigation.navigate('Game', {
       level
     })
     dispatch(setPlayer(username))
   }
-  const [username, setUsername] = useState('')
+  const [username, setUsername] = useState(playerName)
   const [level, setLevel] = useState('')
   const handleInputUsername = (e) => {
     setUsername(e)
@@ -23,6 +23,7 @@ function Home ({ navigation }) {
         <TextInput
           onChangeText={handleInputUsername}
           placeholderTextColor="#444"
+          defaultValue={playerName}
           placeholder="Please input your name"
           style={styles.input} />
       </View>
@@ -38,7 +39,7 @@ function Home ({ navigation }) {
         </TouchableOpacity>
       </View>
       <TouchableOpacity
-        disabled={username ? false : true}
+        disabled={username && level ? false : true}
         onPress={() => goToGame()}
         style={{ width: '50%' }}>
         <Text style={username && level ? styles.btnPlay : styles.btnPlayDisabled}>

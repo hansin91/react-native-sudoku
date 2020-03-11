@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from 'react'
 import { View, TextInput, StyleSheet } from 'react-native'
 import { BoardContext } from '../../../context/BoardContext'
 import { setFilledBoard, setScore } from '../../../actions'
-
 function BoxInput (props) {
   const { board, dispatch, isReset, solution } = useContext(BoardContext)
   const [input, setInput] = useState(props.value)
@@ -61,8 +60,8 @@ const styles = StyleSheet.create({
     borderColor: '#f5c6cb'
   },
   valid: {
-    backgroundColor: '#28a745',
-    borderColor: '#28a745'
+    backgroundColor: '#d4edda',
+    borderColor: '#c3e6cb'
   },
   box: {
     padding: 10,
