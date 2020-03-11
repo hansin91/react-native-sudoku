@@ -4,7 +4,9 @@ import {
   SET_FILLED_BOARD,
   SET_RESET_BOARD,
   VALIDATE_BOARD,
-  SET_SOLUTION_BOARD
+  SET_SOLUTION_BOARD,
+  SET_SCORE,
+  SET_PLAYER
 } from '../actions/types'
 
 export const initialState = {
@@ -13,18 +15,29 @@ export const initialState = {
   isLoading: null,
   isReset: false,
   isValidate: false,
-  solution: []
+  solution: [],
+  username: '',
+  score: 0
 }
 
 export default (state, action) => {
   switch (action.type) {
+    case SET_PLAYER:
+      return {
+        ...state,
+        username: action.payload
+      }
+    case SET_SCORE:
+      return {
+        ...state,
+        score: state.score + action.payload
+      }
     case VALIDATE_BOARD:
       return {
         ...state,
         isValidate: action.payload
       }
     case SET_SOLUTION_BOARD:
-      console.log(action.payload)
       return {
         ...state,
         solution: action.payload

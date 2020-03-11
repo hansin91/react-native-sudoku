@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, ScrollView } from 'react-native'
 import { Container, Text } from 'native-base'
 import Board from './Board'
 import { BoardContext } from '../../../context/BoardContext'
@@ -11,7 +11,7 @@ function GameBoard (props) {
     <View style={styles.container}>
       {isLoading ? <Loader /> : <Text />}
       <Container>
-        <Board level={props.level} />
+        <Board navigation={props.navigation} level={props.level} />
       </Container>
     </View>
   )

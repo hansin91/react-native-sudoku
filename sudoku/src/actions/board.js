@@ -5,7 +5,9 @@ import {
   SET_FILLED_BOARD,
   SET_RESET_BOARD,
   VALIDATE_BOARD,
-  SET_SOLUTION_BOARD
+  SET_SOLUTION_BOARD,
+  SET_PLAYER,
+  SET_SCORE
 } from './types'
 
 export const setLoading = (value) => ({
@@ -46,4 +48,14 @@ export const validateBoard = (value) => ({
 export const setSolutionBoard = (value) => ({
   type: SET_SOLUTION_BOARD,
   payload: value
+})
+
+export const setPlayer = (username) => ({
+  type: SET_PLAYER,
+  payload: username
+})
+
+export const setScore = (step) => ({
+  type: SET_SCORE,
+  payload: step
 })

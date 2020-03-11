@@ -1,10 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Image, View, Text, TextInput, StyleSheet, Button, TouchableOpacity } from 'react-native'
+import { BoardContext } from '../../context/BoardContext'
+import { setPlayer } from '../../actions'
 
 function Home ({ navigation }) {
-  const goToGame = () => navigation.navigate('Game', {
-    level
-  })
+  const { dispatch } = useContext(BoardContext)
+  const goToGame = () => {
+    navigation.navigate('Game', {
+      level
+    })
+    dispatch(setPlayer(username))
+  }
   const [username, setUsername] = useState('')
   const [level, setLevel] = useState('')
   const handleInputUsername = (e) => {
