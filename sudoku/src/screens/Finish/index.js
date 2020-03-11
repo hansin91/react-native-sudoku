@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { View, Text, Button, StyleSheet, ScrollView } from 'react-native'
+import { View, Text, StyleSheet, ScrollView } from 'react-native'
 import { Container } from 'native-base'
 import { BoardContext } from '../../context/BoardContext'
 import Box from '../Game/components/Box'
