@@ -1,17 +1,20 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { Image, View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
 import { BoardContext } from '../../context/BoardContext'
 import { setPlayer } from '../../actions'
 
 function Home ({ navigation }) {
   const { dispatch, playerName } = useContext(BoardContext)
+
   const goToGame = () => {
     navigation.navigate('Game', {
       level
     })
     dispatch(setPlayer(username))
+    setUsername('')
+    setLevel('')
   }
-  const [username, setUsername] = useState(playerName)
+  const [username, setUsername] = useState('')
   const [level, setLevel] = useState('')
   const handleInputUsername = (e) => {
     setUsername(e)
@@ -23,6 +26,7 @@ function Home ({ navigation }) {
         <TextInput
           onChangeText={handleInputUsername}
           placeholderTextColor="#444"
+          autoFocus={true}
           defaultValue={playerName}
           placeholder="Please input your name"
           style={styles.input} />
