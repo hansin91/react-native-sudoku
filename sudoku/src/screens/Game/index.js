@@ -24,14 +24,14 @@ function Game ({ route, navigation }) {
     <View style={styles.container}>
       {isLoading ? <Loader /> : <Text />}
       <Container>
-        <View style={{ flexDirection: 'row', marginBottom: 10 }}>
+        <View style={{ flexDirection: 'row', marginBottom: 10, justifyContent: 'flex-end' }}>
           <Text style={{
             fontWeight: '100',
-            fontSize: 18
+            fontSize: 16
           }}>Score :</Text>
           <Text style={{
             fontWeight: 'bold',
-            fontSize: 18,
+            fontSize: 16,
             paddingLeft: 5
           }}>{score}</Text>
         </View>
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   button: {
     paddingTop: 15,

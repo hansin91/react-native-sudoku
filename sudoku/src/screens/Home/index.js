@@ -18,7 +18,11 @@ function Home ({ navigation }) {
   const [level, setLevel] = useState('')
   const handleInputUsername = (e) => {
     setUsername(e)
+    if (!e) {
+      setLevel('')
+    }
   }
+
   return (
     <View style={styles.container}>
       <Text style={styles.main}>Welcome to Sudoku Puzzle</Text>
@@ -32,14 +36,23 @@ function Home ({ navigation }) {
           style={styles.input} />
       </View>
       <View style={{ marginBottom: 50, marginTop: 10 }}>
-        <TouchableOpacity onPress={() => setLevel('easy')} disabled={username ? false : true}>
-          <Text style={[styles.gameLevel, styles.gameLevelEasy, username ? '' : styles.disabled]}>Easy</Text>
+        <TouchableOpacity onPress={() => setLevel('easy')}>
+          <Text style={[
+            styles.gameLevel,
+            styles.gameLevelEasy,
+            level === 'easy' ? '' : styles.disabled]}>Easy</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => setLevel('medium')} disabled={username ? false : true}>
-          <Text style={[styles.gameLevel, styles.gameLevelMedium, username ? '' : styles.disabled]}>Medium</Text>
+        <TouchableOpacity onPress={() => setLevel('medium')}>
+          <Text style={[
+            styles.gameLevel,
+            styles.gameLevelMedium,
+            level === 'medium' ? '' : styles.disabled]}>Medium</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => setLevel('hard')} disabled={username ? false : true}>
-          <Text style={[styles.gameLevel, styles.gameLevelHard, username ? '' : styles.disabled]}>Hard</Text>
+        <TouchableOpacity onPress={() => setLevel('hard')}>
+          <Text style={[
+            styles.gameLevel,
+            styles.gameLevelHard,
+            level === 'hard' ? '' : styles.disabled]}>Hard</Text>
         </TouchableOpacity>
       </View>
       <TouchableOpacity
@@ -63,7 +76,7 @@ const styles = StyleSheet.create({
     opacity: 0.5,
   },
   gameLevel: {
-    fontSize: 15,
+    fontSize: 16,
     paddingTop: 10,
     paddingBottom: 10,
     paddingRight: 40,
@@ -81,9 +94,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#28a745',
     borderColor: '#28a745'
   },
+  gameLevelEasyActive: {
+    backgroundColor: 'transparent',
+    color: '#28a745',
+    borderWidth: 2
+  },
   gameLevelMedium: {
     backgroundColor: '#ffc107',
-    borderColor: '#ffc107'
+    borderColor: '#ffc107',
   },
   gameLevelHard: {
     backgroundColor: '#dc3545',
