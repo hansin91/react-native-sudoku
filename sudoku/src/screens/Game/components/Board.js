@@ -23,7 +23,6 @@ function Board (props) {
 
   useEffect(() => {
     dispatch(setLoading(true))
-    console.log(props.level)
     api.get('/board?difficulty=' + props.level)
       .then(response => {
         const gameBoard = response.data.board
@@ -31,7 +30,6 @@ function Board (props) {
         return api.post('/solve', encodeParams({ board: gameBoard }))
       })
       .then(response => {
-        console.log(JSON.stringify(response.data.solution))
         dispatch(setSolutionBoard(response.data.solution))
       })
       .catch(err => {
