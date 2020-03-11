@@ -12,7 +12,6 @@ export const BoardProvider = ({ children }) => {
     filledBoard: state.filledBoard,
     isLoading: state.isLoading,
     solution: state.solution,
-    isValidate: state.isValidate,
     playerName: state.username,
     score: state.score,
     dispatch

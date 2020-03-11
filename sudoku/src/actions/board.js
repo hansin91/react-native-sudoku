@@ -41,11 +41,6 @@ export const setFilledBoard = (value) => ({
   payload: value
 })
 
-export const validateBoard = (value) => ({
-  type: VALIDATE_BOARD,
-  payload: value
-})
-
 export const setSolutionBoard = (value) => ({
   type: SET_SOLUTION_BOARD,
   payload: value

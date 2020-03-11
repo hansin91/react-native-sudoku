@@ -3,7 +3,6 @@ import {
   SET_LOADING,
   SET_FILLED_BOARD,
   SET_RESET_BOARD,
-  VALIDATE_BOARD,
   SET_SOLUTION_BOARD,
   SET_SCORE,
   SET_PLAYER,
@@ -15,7 +14,6 @@ export const initialState = {
   filledBoard: [],
   isLoading: null,
   isReset: false,
-  isValidate: false,
   solution: [],
   username: '',
   score: 0
@@ -37,11 +35,6 @@ export default (state, action) => {
       return {
         ...state,
         score: state.score + action.payload
-      }
-    case VALIDATE_BOARD:
-      return {
-        ...state,
-        isValidate: action.payload
       }
     case SET_SOLUTION_BOARD:
       return {
