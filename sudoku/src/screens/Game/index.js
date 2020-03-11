@@ -8,7 +8,7 @@ import { setResetBoard, setBoard, resetScore } from '../../actions'
 
 function Game ({ route, navigation }) {
   const { level } = route.params
-  const { isLoading, dispatch } = useContext(BoardContext)
+  const { isLoading, dispatch, score } = useContext(BoardContext)
 
   const clear = () => {
     dispatch(setResetBoard(true))
@@ -24,6 +24,17 @@ function Game ({ route, navigation }) {
     <View style={styles.container}>
       {isLoading ? <Loader /> : <Text />}
       <Container>
+        <View style={{ flexDirection: 'row', marginBottom: 10 }}>
+          <Text style={{
+            fontWeight: '100',
+            fontSize: 18
+          }}>Score :</Text>
+          <Text style={{
+            fontWeight: 'bold',
+            fontSize: 18,
+            paddingLeft: 5
+          }}>{score}</Text>
+        </View>
         <ScrollView>
           <Board level={level} />
           <View style={{ marginTop: 20 }}>

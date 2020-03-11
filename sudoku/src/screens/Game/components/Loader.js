@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from 'react-native'
 function Loader () {
   return (
     <View style={styles.loader}>
-      <Text style={{ color: '#fff', fontSize: 15, fontWeight: 'bold' }}>Loading</Text>
+      <Text style={{ color: '#fff', fontSize: 15, fontWeight: 'bold' }}>Loading...Please wait</Text>
     </View>
   )
 }
