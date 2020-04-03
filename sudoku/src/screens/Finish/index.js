@@ -1,17 +1,50 @@
 import React, { useContext } from 'react'
-import { View, Text, StyleSheet, ScrollView } from 'react-native'
+import { View, Text, StyleSheet, ScrollView, AsyncStorage } from 'react-native'
 import { Container } from 'native-base'
 import { BoardContext } from '../../context/BoardContext'
 import Box from '../Game/components/Box'
 import { resetScore, setPlayer } from '../../actions'
 
+const savePlayer = async (player) => {
+  try {
+    let players = await getPlayers()
+    players = JSON.parse(players)
+    players.push(player)
+    await AsyncStorage.setItem('players', JSON.stringify(players))
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const getPlayers = async () => {
+  try {
+    const players = await AsyncStorage.getItem('players')
+    if (!players) {
+      await AsyncStorage.setItem('players', JSON.stringify([]))
+    }
+    console.log(players, '==== players =====')
+    return players
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+
 function Finish ({ navigation }) {
   const { playerName, score, solution, dispatch } = useContext(BoardContext)
-  const restartGame = () => {
+  const restartGame = async () => {
     navigation.popToTop()
+    console.log(playerName, '==== name ====')
+    console.log(score, '====== score ======')
+    const player = {
+      name: playerName,
+      score
+    }
+    await savePlayer(player)
     dispatch(resetScore(0))
     dispatch(setPlayer(''))
   }
+
   return (
     <Container>
       <View>
